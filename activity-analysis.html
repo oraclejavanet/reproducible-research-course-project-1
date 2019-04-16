@@ -160,7 +160,14 @@ $(document).ready(function () {
 <div id="code-for-reading-in-the-dataset-andor-processing-the-data" class="section level3">
 <h3>Code for reading in the dataset and/or processing the data</h3>
 <pre class="r"><code>setwd(&quot;~jhunter/repos/coursera/reproducible-research-course-project-1&quot;)
-activityData &lt;- read.csv(&quot;data/activity.csv&quot;)</code></pre>
+activityDataFile &lt;- &quot;data/activity.csv&quot;
+if (!file.exists(activityDataFile)) {
+    tempFile &lt;- tempfile()
+    download.file(&quot;https://d396qusza40orc.cloudfront.net/repdata%2Fdata%2Factivity.zip&quot;, tempFile)
+    unzip(tempFile, exdir = &quot;data&quot;)
+    unlink(tempFile)
+}
+activityData &lt;- read.csv(activityDataFile)</code></pre>
 </div>
 <div id="histogram-of-the-total-number-of-steps-taken-each-day" class="section level3">
 <h3>Histogram of the total number of steps taken each day</h3>

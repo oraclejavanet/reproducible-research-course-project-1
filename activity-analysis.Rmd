@@ -79,7 +79,14 @@ library(readr)
 
 ```{r, echo = TRUE}
 setwd("~jhunter/repos/coursera/reproducible-research-course-project-1")
-activityData <- read.csv("data/activity.csv")
+activityDataFile <- "data/activity.csv"
+if (!file.exists(activityDataFile)) {
+    tempFile <- tempfile()
+    download.file("https://d396qusza40orc.cloudfront.net/repdata%2Fdata%2Factivity.zip", tempFile)
+    unzip(tempFile, exdir = "data")
+    unlink(tempFile)
+}
+activityData <- read.csv(activityDataFile)
 ```
 
 ### Histogram of the total number of steps taken each day
