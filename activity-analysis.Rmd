@@ -68,7 +68,8 @@ knitr::opts_chunk$set(echo = FALSE)
 Load libraries
 
 ```{r, echo = TRUE}
-library(readr)
+library(dplyr)
+library(ggplot2)
 ```
 
 ## Questions
