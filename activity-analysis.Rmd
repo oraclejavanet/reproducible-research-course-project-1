@@ -15,17 +15,15 @@ output:
 [Introduction](#introduction)<br />
 [Set Up Environment](#set-up-environment)<br />
 [Questions](#questions)<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [Code for reading in the dataset and/or processing the data](#code-for-reading-in-the-dataset-and\/or-processing-the-data)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [Code for reading in the dataset and/or processing the data](#code-for-reading-in-the-dataset-andor-processing-the-data)<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [Histogram of the total number of steps taken each day](#histogram-of-the-total-number-of-steps-taken-each-day)<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [Mean and median number of steps taken each day](#mean-and-median-number-of-steps-taken-each-day)<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [Time series plot of the average number of steps taken](#time-series-plot-of-the-average-number-of-steps-taken)<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [The 5-minute interval that, on average, contains the maximum number of steps](#the-5-minute-interval-that,-on-average,-contains-the-maximum-number-of-steps)<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; []()<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; []()<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; []()<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; []()<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; []()<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; []()
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [The 5-minute interval that, on average, contains the maximum number of steps](#the-5-minute-interval-that-on-average-contains-the-maximum-number-of-steps)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [Code to describe and show a strategy for imputing missing data](#code-to-describe-and-show-a-strategy-for-imputing-missing-data)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [Histogram of the total number of steps taken each day after missing values are imputed](#histogram-of-the-total-number-of-steps-taken-each-day-after-missing-values-are-imputed)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [Panel plot comparing the average number of steps taken per 5-minute interval across weekdays and weekends](#panel-plot-comparing-the-average-number-of-steps-taken-per-5-minute-interval-across-weekdays-and-weekends)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [All of the R code needed to reproduce the results (numbers, plots, etc.) in the report](#all-of-the-r-code-needed-to-reproduce-the-results-numbers-plots-etc-in-the-report)
 
 ## Introduction
 
