@@ -74,7 +74,7 @@ library(ggplot2)
 
 ## Questions
 
-*Pending*
+Reports will be run to answer specified in the homework assignment.
 
 ### Code for reading in the dataset and/or processing the data
 
