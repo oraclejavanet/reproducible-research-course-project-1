@@ -78,6 +78,8 @@ Reports will be run to answer specified in the homework assignment.
 
 ### Code for reading in the dataset and/or processing the data
 
+Load and process the dataset
+
 ```{r, echo = TRUE}
 setwd("~jhunter/repos/coursera/reproducible-research-course-project-1")
 activityDataFile <- "data/activity.csv"
