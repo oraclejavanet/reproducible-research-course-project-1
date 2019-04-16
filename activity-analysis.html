@@ -132,7 +132,7 @@ $(document).ready(function () {
 
 <div id="table-of-contents" class="section level2">
 <h2>Table of Contents</h2>
-<p><a href="#introduction">Introduction</a><br /> <a href="#set-up-environment">Set Up Environment</a><br /> <a href="#questions">Questions</a><br />          <a href="#code-for-reading-in-the-dataset-and-or-processing-the-data">Code for reading in the dataset and/or processing the data</a><br />          <a href="#histogram-of-the-total-number-of-steps-taken-each-day">Histogram of the total number of steps taken each day</a><br />          <a href="#mean-and-median-number-of-steps-taken-each-day">Mean and median number of steps taken each day</a><br />          <a href="#time-series-plot-of-the-average-number-of-steps-taken">Time series plot of the average number of steps taken</a><br />          <a href="#the-5-minute-interval-that,-on-average,-contains-the-maximum-number-of-steps">The 5-minute interval that, on average, contains the maximum number of steps</a><br />          <a href></a><br />          <a href></a><br />          <a href></a><br />          <a href></a><br />          <a href></a><br />          <a href></a></p>
+<p><a href="#introduction">Introduction</a><br /> <a href="#set-up-environment">Set Up Environment</a><br /> <a href="#questions">Questions</a><br />          <a href="#code-for-reading-in-the-dataset-and/or-processing-the-data">Code for reading in the dataset and/or processing the data</a><br />          <a href="#histogram-of-the-total-number-of-steps-taken-each-day">Histogram of the total number of steps taken each day</a><br />          <a href="#mean-and-median-number-of-steps-taken-each-day">Mean and median number of steps taken each day</a><br />          <a href="#time-series-plot-of-the-average-number-of-steps-taken">Time series plot of the average number of steps taken</a><br />          <a href="#the-5-minute-interval-that,-on-average,-contains-the-maximum-number-of-steps">The 5-minute interval that, on average, contains the maximum number of steps</a><br />          <a href></a><br />          <a href></a><br />          <a href></a><br />          <a href></a><br />          <a href></a><br />          <a href></a></p>
 </div>
 <div id="introduction" class="section level2">
 <h2>Introduction</h2>
@@ -141,23 +141,26 @@ $(document).ready(function () {
 <p>The data for this assignment can be downloaded from the course web site.</p>
 <p>The variables included in this dataset are:</p>
 <ul>
-<li><p><strong>steps</strong>: Number of steps taking in a 5-minute interval (missing values are coded as <code>NA</code>)</p></li>
-<li><p><strong>date</strong>: The date on which the measurement was taken in YYYY-MM-DD format</p></li>
-<li><p><strong>interval</strong>: Identifier for the 5-minute interval in which measurement was taken</p></li>
+<li><strong>steps</strong>: Number of steps taking in a 5-minute interval (missing values are coded as <code>NA</code>)</li>
+<li><strong>date</strong>: The date on which the measurement was taken in YYYY-MM-DD format</li>
+<li><strong>interval</strong>: Identifier for the 5-minute interval in which measurement was taken</li>
 </ul>
 <p>The dataset is stored in a comma-separated-value (CSV) file and there are a total of 17,568 observations in this dataset.</p>
 </div>
 <div id="set-up-environment" class="section level2">
 <h2>Set Up Environment</h2>
-<pre class="r"><code>library(readr)
-setwd(&quot;~/repos/coursera/reproducible-research-course-project-1&quot;)
-activity&lt;-read.csv(&quot;data/activity.csv&quot;)</code></pre>
+<p>Disable warnings</p>
+<pre class="r"><code>knitr::opts_chunk$set(echo = FALSE)</code></pre>
+<p>Load libraries</p>
+<pre class="r"><code>library(readr)</code></pre>
 </div>
 <div id="questions" class="section level2">
 <h2>Questions</h2>
-<div id="code-for-reading-in-the-dataset-and-or-processing-the-data" class="section level3">
-<h3>Code for reading in the dataset and or processing the data</h3>
 <p><em>Pending</em></p>
+<div id="code-for-reading-in-the-dataset-andor-processing-the-data" class="section level3">
+<h3>Code for reading in the dataset and/or processing the data</h3>
+<pre class="r"><code>setwd(&quot;~jhunter/repos/coursera/reproducible-research-course-project-1&quot;)
+activityData &lt;- read.csv(&quot;data/activity.csv&quot;)</code></pre>
 </div>
 <div id="histogram-of-the-total-number-of-steps-taken-each-day" class="section level3">
 <h3>Histogram of the total number of steps taken each day</h3>

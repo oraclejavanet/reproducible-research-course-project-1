@@ -8,6 +8,11 @@ April 15, 2019
 
 Peer-graded Assignment: Course Project 1
 
+Analysis Report: <a href="https://github.com/oraclejavanet/reproducible-research-course-project-1/blob/master/activity-analysis.html">activity-analysis.html</a>
+
+<a href="http://htmlpreview.github.io/?https://github.com/oraclejavanet/reproducible-research-course-project-1/blob/master/activity-analysis.html" target="_blank">HTML file</a>
+corresponding to the Analysis Report.
+
 ## Introduction
 
 It is now possible to collect a large amount of data about personal
