@@ -68,7 +68,7 @@ knitr::opts_chunk$set(echo = FALSE)
 Load libraries
 
 ```{r, echo = TRUE}
-library(dplyr)
+library(dplyr, warn.conflicts = FALSE)
 library(ggplot2)
 ```
 
@@ -88,6 +88,24 @@ if (!file.exists(activityDataFile)) {
     unlink(tempFile)
 }
 activityData <- read.csv(activityDataFile)
+```
+
+Display variables
+
+```{r, echo = TRUE}
+names(activityData)
+```
+
+Display information about the variables
+
+```{r, echo = TRUE}
+str(activityData)
+```
+
+Display a summary of the dataset
+
+```{r, echo = TRUE}
+summary(activityData)
 ```
 
 ### Histogram of the total number of steps taken each day
