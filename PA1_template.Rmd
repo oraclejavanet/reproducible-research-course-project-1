@@ -74,9 +74,11 @@ library(ggplot2)
 
 ## Questions
 
-*Pending*
+Reports will be run to answer specified in the homework assignment.
 
 ### Code for reading in the dataset and/or processing the data
+
+**Load and Process the Dataset**
 
 ```{r, echo = TRUE}
 setwd("~jhunter/repos/coursera/reproducible-research-course-project-1")
@@ -87,38 +89,73 @@ if (!file.exists(activityDataFile)) {
     unzip(tempFile, exdir = "data")
     unlink(tempFile)
 }
-activityData <- read.csv(activityDataFile)
+activityData <- read.csv(activityDataFile, sep = ",")
+activityData$date <- as.POSIXct(activityData$date, format = "%Y-%m-%d", tz = "")
+weekDay <- weekdays(activityData$date, abbreviate = FALSE)
+activityData <- cbind(activityData, weekDay)
+names(activityData)[4] <- "week_day"
 ```
 
-Display variables
+**Display Dataset Summary**
 
 ```{r, echo = TRUE}
 names(activityData)
 ```
 
-Display information about the variables
-
 ```{r, echo = TRUE}
 str(activityData)
 ```
-
-Display a summary of the dataset
 
 ```{r, echo = TRUE}
 summary(activityData)
 ```
 
+```{r, echo = TRUE}
+head(activityData)
+```
+
+**Display Number of Missing Data Values**
+```{r, echo = TRUE}
+sum(is.na(activityData$steps) == TRUE)
+```
+
+**Calculate Steps per Day (excluding missing values)**
+
+```{r, echo = TRUE}
+stepsPerDay <- with(activityData, aggregate(steps, list(date), FUN = sum, na.rm = TRUE))
+colnames(stepsPerDay) <- c("Date", "Steps")
+head(stepsPerDay)
+```
+
 ### Histogram of the total number of steps taken each day
 
-*Pending*
+```{r, echo = TRUE}
+gp <- ggplot(stepsPerDay, aes(Steps))
+gp + geom_histogram(boundary = 0, binwidth = 2500, col = "darkblue", fill = "lightblue") + ggtitle("Histogram of Steps per Day") + xlab("Steps") + ylab("Frequency") + theme(plot.title = element_text(face = "bold", size = 12, hjust = 0.5)) + scale_x_continuous(breaks = seq(0, 25000, 2500)) + scale_y_continuous(breaks = seq(0, 18, 2))
+```
 
 ### Mean and median number of steps taken each day
 
-*Pending*
+**Mean (excluding missing values)**
+
+```{r, echo = TRUE}
+mean(stepsPerDay$Steps, na.rm = TRUE)
+```
+
+**Median (excluding missing values)**
+
+```{r, echo = TRUE}
+median(stepsPerDay$Steps, na.rm = TRUE)
+```
 
 ### Time series plot of the average number of steps taken
 
-*Pending*
+* Make a time series plot (i.e. type = "l") of the 5-minute interval (x-axis)
+  and the average number of steps taken, averaged across all days (y-axis)
+
+
+* Which 5-minute interval, on average across all the days in the dataset,
+  contains the maximum number of steps?
 
 ### The 5-minute interval that, on average, contains the maximum number of steps
 
