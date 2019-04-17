@@ -145,7 +145,7 @@ the dataset with the filled-in missing values for this part.
    across all weekday days or weekend days (y-axis). The plot should look
    something like the following, which was created using **simulated data**:
 
-![Sample panel plot](images/sample_panelplot.png) 
+![Sample panel plot](figures/sample_panelplot.png) 
 
 
 **Your plot will look different from the one above** because you will
