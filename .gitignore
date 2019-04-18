@@ -12,6 +12,7 @@
 # +--------------------------------------------------+
 
 *.nb.html
+activity-analysis.R
 
 # TODO file
 TODO.txt
