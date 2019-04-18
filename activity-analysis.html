@@ -313,13 +313,10 @@ gp2 + geom_line(col = &quot;wheat4&quot;) + ggtitle(&quot;Average Steps per 5-Mi
 <pre class="r"><code>sum(is.na(activityData$steps) == TRUE)</code></pre>
 <pre><code>## [1] 2304</code></pre>
 <p>Devise a strategy for filling in all of the missing values in the dataset. The strategy does not need to be sophisticated. For example, you could use the mean/median for that day, or the mean for that 5-minute interval, etc.</p>
-<p>Strategy:</p>
-<pre><code>Add a new column to the origin dataset named `stepsCompleted`
-that replaces missing values with the rounded average of the 5-minute
-interval.</code></pre>
-<pre class="r"><code>activityData$stepsCompleted &lt;- ifelse(is.na(activityData$steps), round(stepsPerIntervalAvg$steps[match(activityData$interval, stepsPerIntervalAvg$interval)], 0), activityData$steps)</code></pre>
+<p>Strategy: Add a new column to the origin dataset named <code>steps_completed</code> that replaces missing values with the rounded average of the 5-minute interval.</p>
+<pre class="r"><code>activityData$steps_completed &lt;- ifelse(is.na(activityData$steps), round(stepsPerIntervalAvg$steps[match(activityData$interval, stepsPerIntervalAvg$interval)], 0), activityData$steps)</code></pre>
 <p>Create a new dataset that is equal to the original dataset but with the missing data filled in.</p>
-<pre class="r"><code>activityDataNoNA &lt;- data.frame(steps = activityData$stepsCompleted, interval = activityData$interval, date = activityData$date)
+<pre class="r"><code>activityDataNoNA &lt;- data.frame(steps = activityData$steps_completed, interval = activityData$interval, date = activityData$date)
 head(activityDataNoNA, n = 10)</code></pre>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
@@ -344,16 +341,6 @@ gp3 + geom_histogram(boundary = 0, binwidth = 2500, col = &quot;wheat4&quot;, fi
 <p>What is the impact of imputing missing data on the estimates of the total daily number of steps?</p>
 <p>Reviewing the histogram, the only bin that was impacted is the interval between 10000 and 12500 steps which grew from a frequency of 18 to a frequency of 26 (44%). Instead of replacing missing values with the mean, such as the mode or median, may have produced different results.</p>
 <style>
-  table.bottomBorder { 
-    border-collapse: collapse; 
-  }
-  table.bottomBorder td, 
-  table.bottomBorder th { 
-    border-bottom: 1px solid black; 
-    padding: 10px; 
-    text-align: left;
-  }
-  
   table.gridtable {
     font-family: verdana,arial,sans-serif;
     font-size:11px;
@@ -386,7 +373,7 @@ Statistic
 Original Dataset
 </th>
 <th>
-Modified Dataset
+Imputed Dataset
 </th>
 <th>
 Difference
