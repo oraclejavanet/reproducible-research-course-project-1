@@ -343,29 +343,83 @@ gp3 + geom_histogram(boundary = 0, binwidth = 2500, col = &quot;wheat4&quot;, fi
 <p>They do differ, but not significantly when looking at the mean and the median of the total daily number of steps.</p>
 <p>What is the impact of imputing missing data on the estimates of the total daily number of steps?</p>
 <p>Reviewing the histogram, the only bin that was impacted is the interval between 10000 and 12500 steps which grew from a frequency of 18 to a frequency of 26 (44%). Instead of replacing missing values with the mean, such as the mode or median, may have produced different results.</p>
-<table>
-<thead>
-<tr class="header">
-<th>Statistic</th>
-<th align="right">Original Dataset</th>
-<th align="right">Modified Dataset</th>
-<th align="right">Difference</th>
+<style>
+  table.bottomBorder { 
+    border-collapse: collapse; 
+  }
+  table.bottomBorder td, 
+  table.bottomBorder th { 
+    border-bottom: 1px solid black; 
+    padding: 10px; 
+    text-align: left;
+  }
+  
+  table.gridtable {
+    font-family: verdana,arial,sans-serif;
+    font-size:11px;
+    color:#333333;
+    border-width: 1px;
+    border-color: #666666;
+    border-collapse: collapse;
+  }
+  table.gridtable th {
+    border-width: 1px;
+    padding: 8px;
+    border-style: solid;
+    border-color: #666666;
+    background-color: #dedede;
+  }
+  table.gridtable td {
+    border-width: 1px;
+    padding: 8px;
+    border-style: solid;
+    border-color: #666666;
+    background-color: #ffffff;
+  }
+</style>
+<table class="gridtable">
+<tr>
+<th>
+Statistic
+</th>
+<th>
+Original Dataset
+</th>
+<th>
+Modified Dataset
+</th>
+<th>
+Difference
+</th>
 </tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>mean</td>
-<td align="right">9,354.23</td>
-<td align="right">10,765.64</td>
-<td align="right">1,411.41 (15%)</td>
+<tr>
+<td>
+mean
+</td>
+<td align="right">
+9,354.23
+</td>
+<td align="right">
+10,765.64
+</td>
+<td align="right">
+1,411.41 (15%)
+</td>
 </tr>
-<tr class="even">
-<td>median</td>
-<td align="right">10,395</td>
-<td align="right">10,762</td>
-<td align="right">367 (3%)</td>
+<tr>
+<td>
+median
+</td>
+<td align="right">
+10,395
+</td>
+<td align="right">
+10,762
+</td>
+<td align="right">
+367 (3%)
+</td>
 </tr>
-</tbody>
 </table>
 </div>
 <div id="are-there-differences-in-activity-patterns-between-weekdays-and-weekends" class="section level3">
