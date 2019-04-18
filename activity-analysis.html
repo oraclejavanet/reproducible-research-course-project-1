@@ -340,7 +340,9 @@ gp3 + geom_histogram(boundary = 0, binwidth = 2500, col = &quot;wheat4&quot;, fi
 <pre class="r"><code>median(stepsPerDayCompleted$steps)</code></pre>
 <pre><code>## [1] 10762</code></pre>
 <p>Do these values differ from the estimates from the first part of the assignment?</p>
-<p>They do differ, but not significantly when looking at the mean and the median of the total daily number of steps. Reviewing the histogram, the only bin that was impacted is the interval between 10000 and 12500 steps which grew from a frequency of 18 to a frequency of 26 (44%). Instead of replacing missing values with the mean, such as the mode or median, may have produced different results.</p>
+<p>They do differ, but not significantly when looking at the mean and the median of the total daily number of steps.</p>
+<p>What is the impact of imputing missing data on the estimates of the total daily number of steps?</p>
+<p>Reviewing the histogram, the only bin that was impacted is the interval between 10000 and 12500 steps which grew from a frequency of 18 to a frequency of 26 (44%). Instead of replacing missing values with the mean, such as the mode or median, may have produced different results.</p>
 <table>
 <thead>
 <tr class="header">
@@ -365,8 +367,6 @@ gp3 + geom_histogram(boundary = 0, binwidth = 2500, col = &quot;wheat4&quot;, fi
 </tr>
 </tbody>
 </table>
-<p>What is the impact of imputing missing data on the estimates of the total daily number of steps?</p>
-<p><em>Pending</em></p>
 </div>
 <div id="are-there-differences-in-activity-patterns-between-weekdays-and-weekends" class="section level3">
 <h3>Are there differences in activity patterns between weekdays and weekends?</h3>
