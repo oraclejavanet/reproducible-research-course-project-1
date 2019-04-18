@@ -240,10 +240,60 @@ Reviewing the histogram, the only bin that was impacted is the interval between
 (44%). Instead of replacing missing values with the mean, such as the mode or 
 median, may have produced different results.
 
-| Statistic | Original Dataset   | Modified Dataset   | Difference      |
-| --------- | ------------------:| ------------------:| ---------------:|
-| mean      | 9,354.23           | 10,765.64          | 1,411.41 (15%)  |
-| median    | 10,395             | 10,762             | 367 (3%)        |
+<style>
+  table.bottomBorder { 
+    border-collapse: collapse; 
+  }
+  table.bottomBorder td, 
+  table.bottomBorder th { 
+    border-bottom: 1px solid black; 
+    padding: 10px; 
+    text-align: left;
+  }
+  
+  table.gridtable {
+    font-family: verdana,arial,sans-serif;
+    font-size:11px;
+    color:#333333;
+    border-width: 1px;
+    border-color: #666666;
+    border-collapse: collapse;
+  }
+  table.gridtable th {
+    border-width: 1px;
+    padding: 8px;
+    border-style: solid;
+    border-color: #666666;
+    background-color: #dedede;
+  }
+  table.gridtable td {
+    border-width: 1px;
+    padding: 8px;
+	border-style: solid;
+	border-color: #666666;
+	background-color: #ffffff;
+  }
+</style>
+<table class="gridtable">
+  <tr>
+  <th>Statistic</th>
+  <th>Original Dataset</th>
+  <th>Modified Dataset</th>
+  <th>Difference</th>
+</tr>
+<tr>
+  <td>mean</td>
+  <td align="right">9,354.23</td>
+  <td align="right">10,765.64</td>
+  <td align="right">1,411.41 (15%)</td>
+</tr>
+<tr>
+  <td>median</td>
+  <td align="right">10,395</td>
+  <td align="right">10,762</td>
+  <td align="right">367 (3%)</td>
+</tr>
+</table>
 
 ### Are there differences in activity patterns between weekdays and weekends?
 
