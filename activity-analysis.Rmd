@@ -13,7 +13,7 @@ output:
 ## Table of Contents
 
 [Introduction](#introduction)<br />
-[Set Up Environment](#set-up-environment)<br />
+[Set up environment](#set-up-environment)<br />
 [Questions](#questions)<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [Loading and preprocessing the data](#loading-and-preprocessing-the-data)<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [What is mean total number of steps taken per day?](#what-is-mean-total-number-of-steps-taken-per-day)<br />
@@ -40,12 +40,10 @@ consists of two months of data from an anonymous individual collected during the
 months of October and November, 2012 and include the number of steps taken in 5
 minute intervals each day.
 
-The data for this assignment can be downloaded from the course web site.
-
 The variables included in this dataset are:
 
 * **steps**: Number of steps taking in a 5-minute interval (missing values are
-  coded as ```NA```)
+  coded as `NA`)
 * **date**: The date on which the measurement was taken in YYYY-MM-DD format
 * **interval**: Identifier for the 5-minute interval in which measurement was
   taken
@@ -53,7 +51,7 @@ The variables included in this dataset are:
 The dataset is stored in a comma-separated-value (CSV) file and there are a
 total of 17,568 observations in this dataset.
 
-## Set Up Environment
+## Set up environment
 
 Disable warnings
 
@@ -70,7 +68,7 @@ library(ggplot2)
 
 ## Questions
 
-Reports will be run to answer specified in the homework assignment.
+Reports will be run to answer specified questions in the homework assignment.
 
 ### Loading and preprocessing the data
 
@@ -113,15 +111,15 @@ Calculate steps per day (excluding missing values)
 
 ```{r, echo = TRUE}
 stepsPerDay <- with(activityData, aggregate(steps, list(date), FUN = sum, na.rm = TRUE))
-colnames(stepsPerDay) <- c("Date", "Steps")
+colnames(stepsPerDay) <- c("date", "steps")
 head(stepsPerDay)
 ```
 
 Display histogram
 
 ```{r, echo = TRUE}
-gp1 <- ggplot(stepsPerDay, aes(stepsPerDay$Steps))
-gp1 + geom_histogram(boundary = 0, binwidth = 2500, col = "wheat4", fill = "wheat2") + ggtitle("Histogram of Steps per Day") + xlab("Total number of steps") + ylab("Frequency") + theme(plot.title = element_text(face = "bold", size = 12, hjust = 0.5)) + scale_x_continuous(breaks = seq(0, 25000, 2500)) + scale_y_continuous(breaks = seq(0, 18, 2))
+gp1 <- ggplot(stepsPerDay, aes(stepsPerDay$steps))
+gp1 + geom_histogram(boundary = 0, binwidth = 2500, col = "wheat4", fill = "wheat2") + ggtitle("Histogram of steps per day") + xlab("Total number of steps") + ylab("Frequency") + theme(plot.title = element_text(face = "bold", size = 12, hjust = 0.5)) + scale_x_continuous(breaks = seq(0, 25000, 2500)) + scale_y_continuous(breaks = seq(0, 18, 2))
 ```
 
 Mean and median number of steps taken each day
@@ -129,13 +127,13 @@ Mean and median number of steps taken each day
 Mean (excluding missing values)
 
 ```{r, echo = TRUE}
-mean(stepsPerDay$Steps, na.rm = TRUE)
+mean(stepsPerDay$steps, na.rm = TRUE)
 ```
 
 Median (excluding missing values)
 
 ```{r, echo = TRUE}
-median(stepsPerDay$Steps, na.rm = TRUE)
+median(stepsPerDay$steps, na.rm = TRUE)
 ```
 
 **Note**: adding `na.rm = TRUE` was not necessary since the `stepsPerDay`
@@ -154,7 +152,7 @@ Make a time series plot (i.e. type = "l") of the 5-minute interval (x-axis) and 
 
 ```{r, echo = TRUE}
 gp2 <- ggplot(stepsPerIntervalAvg, aes(stepsPerIntervalAvg$interval, stepsPerIntervalAvg$steps))
-gp2 + geom_line(col = "wheat4") + ggtitle("Average Steps per 5-Minute Time Interval") + xlab("Interval") + ylab("Average number of steps") + theme(plot.title = element_text(face = "bold", size = 12, hjust = 0.5))
+gp2 + geom_line(col = "wheat4") + ggtitle("Average steps per 5-minute time interval") + xlab("Interval") + ylab("Average number of steps") + theme(plot.title = element_text(face = "bold", size = 12, hjust = 0.5))
 ```
 
 Which 5-minute interval, on average across all the days in the dataset, contains the maximum number of steps?
@@ -182,11 +180,9 @@ Devise a strategy for filling in all of the missing values in the dataset. The
 strategy does not need to be sophisticated. For example, you could use the
 mean/median for that day, or the mean for that 5-minute interval, etc.
     
-Strategy:
-    
-    Add a new column to the origin dataset named `stepsCompleted`
-    that replaces missing values with the rounded average of the 5-minute
-    interval.
+Strategy: Add a new column to the origin dataset named `stepsCompleted`
+that replaces missing values with the rounded average of the 5-minute
+interval.
     
 ```{r, echo = TRUE}
 activityData$stepsCompleted <- ifelse(is.na(activityData$steps), round(stepsPerIntervalAvg$steps[match(activityData$interval, stepsPerIntervalAvg$interval)], 0), activityData$steps)
@@ -227,95 +223,110 @@ Median
 median(stepsPerDayCompleted$steps)
 ```
 
-Do these values differ from the estimates from the first part of the assignment?
+1. Do these values differ from the estimates from the first part of the assignment?
+    
+    They do differ, but not significantly when looking at the mean and the
+    median of the total daily number of steps.
 
-They do differ, but not significantly when looking at the mean and the
-median of the total daily number of steps.
-
-What is the impact of imputing missing data on the estimates of the total daily
-number of steps?
-
-Reviewing the histogram, the only bin that was impacted is the interval between
-10000 and 12500 steps which grew from a frequency of 18 to a frequency of 26
-(44%). Instead of replacing missing values with the mean, such as the mode or 
-median, may have produced different results.
-
-<style>
-  table.bottomBorder { 
-    border-collapse: collapse; 
-  }
-  table.bottomBorder td, 
-  table.bottomBorder th { 
-    border-bottom: 1px solid black; 
-    padding: 10px; 
-    text-align: left;
-  }
-  
-  table.gridtable {
-    font-family: verdana,arial,sans-serif;
-    font-size:11px;
-    color:#333333;
-    border-width: 1px;
-    border-color: #666666;
-    border-collapse: collapse;
-  }
-  table.gridtable th {
-    border-width: 1px;
-    padding: 8px;
-    border-style: solid;
-    border-color: #666666;
-    background-color: #dedede;
-  }
-  table.gridtable td {
-    border-width: 1px;
-    padding: 8px;
-	border-style: solid;
-	border-color: #666666;
-	background-color: #ffffff;
-  }
-</style>
-<table class="gridtable">
-  <tr>
-  <th>Statistic</th>
-  <th>Original Dataset</th>
-  <th>Modified Dataset</th>
-  <th>Difference</th>
-</tr>
-<tr>
-  <td>mean</td>
-  <td align="right">9,354.23</td>
-  <td align="right">10,765.64</td>
-  <td align="right">1,411.41 (15%)</td>
-</tr>
-<tr>
-  <td>median</td>
-  <td align="right">10,395</td>
-  <td align="right">10,762</td>
-  <td align="right">367 (3%)</td>
-</tr>
-</table>
+1. What is the impact of imputing missing data on the estimates of the total daily
+   number of steps?
+    
+    Reviewing the histogram, the only two bins that were impacted are the
+    intervals 0 - 2500 and 
+    10000 - 12500 steps; the latter of which grew from a frequency of 18 to a
+    frequency of 26 (44%). Instead of replacing missing values with the mean,
+    such as the mode or median, may have produced different results.
+    
+    <style>
+      table.gridtable {
+        font-family: verdana,arial,sans-serif;
+        font-size:11px;
+        color:#333333;
+        border-width: 1px;
+        border-color: #666666;
+        border-collapse: collapse;
+      }
+      table.gridtable th {
+        border-width: 1px;
+        padding: 8px;
+        border-style: solid;
+        border-color: #666666;
+        background-color: #dedede;
+      }
+      table.gridtable td {
+        border-width: 1px;
+        padding: 8px;
+    	border-style: solid;
+    	border-color: #666666;
+    	background-color: #ffffff;
+      }
+    </style>
+    <table class="gridtable">
+      <tr>
+      <th>Statistic</th>
+      <th>Original Dataset</th>
+      <th>Imputed Dataset</th>
+      <th>Difference</th>
+    </tr>
+    <tr>
+      <td>mean</td>
+      <td align="right">9,354.23</td>
+      <td align="right">10,765.64</td>
+      <td align="right">1,411.41 (15%)</td>
+    </tr>
+    <tr>
+      <td>median</td>
+      <td align="right">10,395</td>
+      <td align="right">10,762</td>
+      <td align="right">367 (3%)</td>
+    </tr>
+    </table>
 
 ### Are there differences in activity patterns between weekdays and weekends?
 
 For this part, the `weekdays()` function may be of some help here. Use the
 dataset with the filled-in missing values for this part.
 
+In this example, I created the following two factor variables:
+
+* **weekDay**: indicate the day of the week (non-abbreviated)
+* **dayType**: indicate whether the date is a weekday or a weekend
+
+The current date variable in the dataset has already been formatted to represent
+a date value using the `as.POSIXct()` function.
+
 ```{r, echo = TRUE}
+# create a factor variable indicating the day of the week
 weekDay <- weekdays(activityDataNoNA$date, abbreviate = FALSE)
 activityDataNoNA <- cbind(activityDataNoNA, weekDay)
-names(activityDataNoNA)[4] <- "week_day"
+names(activityDataNoNA)[4] <- "weekDay"
+
+# create a factor variable indicating weekday or weekend
+dayType <- ifelse(activityDataNoNA$weekDay == 'Saturday' | activityDataNoNA$weekDay == 'Sunday', 'weekend', 'weekday')
+activityDataNoNA <- cbind(activityDataNoNA, dayType)
+names(activityDataNoNA)[5] <- "dayType"
+
+# let's see the first 10 observations
 head(activityDataNoNA, n = 10)
 ```
 
-Create a new factor variable in the dataset with two levels – "weekday" and
-"weekend" indicating whether a given date is a weekday or weekend day.
+Prepare data:
 
-*Pending*
+* create a data frame `stepsPerTime` that represents average steps per
+  time interval by weekday/weekend
+* add a `time` variable to display the time interval average in hours
+
+```{r, echo = TRUE}
+stepsPerTime <- aggregate(steps ~ interval + dayType, data = activityDataNoNA, FUN = mean, na.action = na.omit)
+stepsPerTime$time <- stepsPerTime$interval/100
+head(stepsPerTime, n = 10)
+```
 
 Make a panel plot containing a time series plot (i.e. `type="l"`) of the
 5-minute interval (x-axis) and the average number of steps taken, averaged
-across all weekday days or weekend days (y-axis). See the README file in the
-GitHub repository to see an example of what this plot should look like using
-simulated data.
-   
-*Pending*
+across all weekday days or weekend days (y-axis).
+
+```{r, echo = TRUE}
+gp4 <- ggplot(stepsPerTime, aes(time, steps))
+gp4 + geom_line(col = "wheat4") + ggtitle("Average steps per time interval\n(weekdays vs. weekends)") + xlab("Time (in hours)") + ylab("Steps") + theme(plot.title = element_text(face = "bold", size = 12, hjust = 0.5)) + facet_grid(dayType ~ .)
+```
