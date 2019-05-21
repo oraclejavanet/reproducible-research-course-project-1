@@ -1,4 +1,4 @@
-# Reproducible Research Project
+# Reproducible Research Project 1
 
 **Jeffrey M. Hunter**
 
@@ -8,10 +8,13 @@ April 18, 2019
 
 Peer-graded Assignment: Course Project 1
 
-Analysis Report: <a href="https://github.com/oraclejavanet/reproducible-research-course-project-1/blob/master/PA1_template.html">PA1_template.html</a>
+**Analysis report available on RPubs**
 
-<a href="http://htmlpreview.github.io/?https://github.com/oraclejavanet/reproducible-research-course-project-1/blob/master/PA1_template.html" target="_blank">HTML file</a>
-corresponding to the Analysis Report.
+* <a href="http://rpubs.com/OracleJavaNet/498032">Reproducible Research Course Project 1</a>
+
+**Analysis report available on GitHub**
+
+* <a href="http://htmlpreview.github.io/?https://github.com/oraclejavanet/reproducible-research-course-project-1/blob/master/PA1_template.html" target="_blank">Reproducible Research Course Project 1</a>
 
 ## Introduction
 

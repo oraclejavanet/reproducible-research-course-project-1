@@ -1,27 +1,38 @@
 ---
-title: "Reproducible Research Project 1"
+title: "Reproducible Research Course Project 1"
 author: "Jeffrey M. Hunter"
-date: "4/18/2019"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
 output:
   html_document:
+    toc: yes
+    toc_float: yes
+    theme: cosmo
+    keep_md: no
     df_print: paged
-  pdf_document: default
-  html_notebook: default
-  pdf_notebook: default
+  pdf_document:
+    toc: yes
+    df_print: kable
+    number_sections: false
+    fig_caption: yes
+    highlight: tango
+    dev: pdf
+  word_document:
+    toc: yes
+    df_print: paged
+    keep_md: no
 ---
 
-## Table of Contents
+## Course Project
 
-[Introduction](#introduction)<br />
-[Set up environment](#set-up-environment)<br />
-[Questions](#questions)<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [Loading and preprocessing the data](#loading-and-preprocessing-the-data)<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [What is mean total number of steps taken per day?](#what-is-mean-total-number-of-steps-taken-per-day)<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [What is the average daily activity pattern?](#what-is-the-average-daily-activity-pattern)<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [Imputing missing values](#imputing-missing-values)<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [Are there differences in activity patterns between weekdays and weekends?](#are-there-differences-in-activity-patterns-between-weekdays-and-weekends)<br />
+**Reproducible Research Course Project 1**
 
-## Introduction
+Peer-graded Assignment
+
+* This course project is available on GitHub
+
+    <a href="https://github.com/oraclejavanet/reproducible-research-course-project-1" target="_top">Reproducible Research Course Project 1</a>
+
+## Synopsis
 
 It is now possible to collect a large amount of data about personal movement
 using activity monitoring devices such as a
@@ -51,19 +62,39 @@ The variables included in this dataset are:
 The dataset is stored in a comma-separated-value (CSV) file and there are a
 total of 17,568 observations in this dataset.
 
-## Set up environment
+## Environment Setup
 
-Disable warnings
+```{r setup, include = FALSE}
+# set knitr options
+knitr::opts_chunk$set(echo = TRUE, fig.path='figures/')
 
-```{r setup, include = TRUE}
-knitr::opts_chunk$set(echo = FALSE)
+# clear global workspace (including hidden objects) for this session
+rm(list = ls(all.names = TRUE))
+
+# free up memory and display statistics on free memory
+gc()
+
+# disable scientific notation for numbers
+options(scipen = 1)
 ```
 
-Load libraries
+Load packages used in this analysis.
 
-```{r, echo = TRUE}
-library(dplyr, warn.conflicts = FALSE)
-library(ggplot2)
+```{r load-packages, echo = TRUE}
+if (!require(ggplot2)) {
+    install.packages("ggplot2")
+    library(ggplot2)
+}
+if (!require(dplyr)) {
+    install.packages("dplyr")
+    library(dplyr, warn.conflicts = FALSE)
+}
+```
+
+Display session information.
+
+```{r display-session-info, echo = TRUE}
+sessionInfo()
 ```
 
 ## Questions
@@ -75,7 +106,7 @@ Reports will be run to answer specified questions in the homework assignment.
 Load and process the dataset
 
 ```{r, echo = TRUE}
-setwd("~jhunter/repos/coursera/reproducible-research-course-project-1")
+setwd("~/repos/coursera/github-assignments/reproducible-research-course-project-1")
 activityDataFile <- "data/activity.csv"
 if (!file.exists(activityDataFile)) {
     tempFile <- tempfile()
@@ -109,7 +140,7 @@ head(activityData)
 
 Calculate steps per day (excluding missing values)
 
-```{r, echo = TRUE}
+```{r calculate-steps-per-day, echo = TRUE}
 stepsPerDay <- with(activityData, aggregate(steps, list(date), FUN = sum, na.rm = TRUE))
 colnames(stepsPerDay) <- c("date", "steps")
 head(stepsPerDay)
@@ -117,22 +148,22 @@ head(stepsPerDay)
 
 Display histogram
 
-```{r, echo = TRUE}
-gp1 <- ggplot(stepsPerDay, aes(stepsPerDay$steps))
-gp1 + geom_histogram(boundary = 0, binwidth = 2500, col = "wheat4", fill = "wheat2") + ggtitle("Histogram of steps per day") + xlab("Total number of steps") + ylab("Frequency") + theme(plot.title = element_text(face = "bold", size = 12, hjust = 0.5)) + scale_x_continuous(breaks = seq(0, 25000, 2500)) + scale_y_continuous(breaks = seq(0, 18, 2))
+```{r histogram-of-steps-per-day, echo = TRUE}
+g <- ggplot(stepsPerDay, aes(stepsPerDay$steps))
+g + geom_histogram(boundary = 0, binwidth = 2500, col = "wheat4", fill = "wheat2") + ggtitle("Histogram of steps per day") + xlab("Total number of steps") + ylab("Frequency") + theme(plot.title = element_text(face = "bold", size = 12, hjust = 0.5)) + scale_x_continuous(breaks = seq(0, 25000, 2500)) + scale_y_continuous(breaks = seq(0, 18, 2))
 ```
 
 Mean and median number of steps taken each day
 
 Mean (excluding missing values)
 
-```{r, echo = TRUE}
+```{r calc-mean-steps-per-day, echo = TRUE}
 mean(stepsPerDay$steps, na.rm = TRUE)
 ```
 
 Median (excluding missing values)
 
-```{r, echo = TRUE}
+```{r calc-median-steps-per-day, echo = TRUE}
 median(stepsPerDay$steps, na.rm = TRUE)
 ```
 
@@ -142,23 +173,23 @@ data frame already excluded `NA` values.
 ### What is the average daily activity pattern?
 
 Calculate steps per time interval
-    
-```{r, echo = TRUE}
+
+```{r calculate-steps-per-time-interval, echo = TRUE}
 stepsPerIntervalAvg <- aggregate(steps ~ interval, data = activityData, FUN = mean, na.action = na.omit)
 colnames(stepsPerIntervalAvg) <- c("interval", "steps")
 ```
 
 Make a time series plot (i.e. type = "l") of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all days (y-axis)
 
-```{r, echo = TRUE}
-gp2 <- ggplot(stepsPerIntervalAvg, aes(stepsPerIntervalAvg$interval, stepsPerIntervalAvg$steps))
-gp2 + geom_line(col = "wheat4") + ggtitle("Average steps per 5-minute time interval") + xlab("Interval") + ylab("Average number of steps") + theme(plot.title = element_text(face = "bold", size = 12, hjust = 0.5))
+```{r average-steps-per-5-minute-time-interval, echo = TRUE}
+g <- ggplot(stepsPerIntervalAvg, aes(stepsPerIntervalAvg$interval, stepsPerIntervalAvg$steps))
+g + geom_line(col = "wheat4") + ggtitle("Average steps per 5-minute time interval") + xlab("Interval") + ylab("Average number of steps") + theme(plot.title = element_text(face = "bold", size = 12, hjust = 0.5))
 ```
 
 Which 5-minute interval, on average across all the days in the dataset, contains the maximum number of steps?
 
 ```{r, echo = TRUE}
-activityData %>% group_by(interval) %>% 
+activityData %>% group_by(interval) %>%
     summarize(meanByInterval = mean(steps, na.rm = TRUE)) %>%
     filter(meanByInterval == max(meanByInterval))
 ```
@@ -179,11 +210,11 @@ sum(is.na(activityData$steps) == TRUE)
 Devise a strategy for filling in all of the missing values in the dataset. The
 strategy does not need to be sophisticated. For example, you could use the
 mean/median for that day, or the mean for that 5-minute interval, etc.
-    
+
 Strategy: Add a new column to the origin dataset named `stepsCompleted`
 that replaces missing values with the rounded average of the 5-minute
 interval.
-    
+
 ```{r, echo = TRUE}
 activityData$stepsCompleted <- ifelse(is.na(activityData$steps), round(stepsPerIntervalAvg$steps[match(activityData$interval, stepsPerIntervalAvg$interval)], 0), activityData$steps)
 ```
@@ -202,11 +233,11 @@ Do these values differ from the estimates from the first part of the
 assignment? What is the impact of imputing missing data on the estimates of
 the total daily number of steps?
 
-```{r, echo = TRUE}
+```{r histogram-of-steps-per-day-mean-to-na, echo = TRUE}
 stepsPerDayCompleted <- aggregate(activityDataNoNA$steps, list(activityDataNoNA$date), FUN = sum)
 colnames(stepsPerDayCompleted) <- c("date", "steps")
-gp3 <- ggplot(stepsPerDayCompleted, aes(stepsPerDayCompleted$steps))
-gp3 + geom_histogram(boundary = 0, binwidth = 2500, col = "wheat4", fill = "wheat2") + ggtitle("Histogram of steps per day\n(missing values replaced by mean)") + xlab("Total number of steps") + ylab("Frequency") + theme(plot.title = element_text(face = "bold", size = 12, hjust = 0.5)) + scale_x_continuous(breaks = seq(0, 25000, 2500)) + scale_y_continuous(breaks=seq(0, 26, 2))
+g <- ggplot(stepsPerDayCompleted, aes(stepsPerDayCompleted$steps))
+g + geom_histogram(boundary = 0, binwidth = 2500, col = "wheat4", fill = "wheat2") + ggtitle("Histogram of steps per day\n(missing values replaced by mean)") + xlab("Total number of steps") + ylab("Frequency") + theme(plot.title = element_text(face = "bold", size = 12, hjust = 0.5)) + scale_x_continuous(breaks = seq(0, 25000, 2500)) + scale_y_continuous(breaks=seq(0, 26, 2))
 ```
 
 Calculate and report the mean and median total number of steps taken per day.
@@ -224,19 +255,19 @@ median(stepsPerDayCompleted$steps)
 ```
 
 1. Do these values differ from the estimates from the first part of the assignment?
-    
+
     They do differ, but not significantly when looking at the mean and the
     median of the total daily number of steps.
 
 1. What is the impact of imputing missing data on the estimates of the total daily
    number of steps?
-    
+
     Reviewing the histogram, the only two bins that were impacted are the
-    intervals 0 - 2500 and 
+    intervals 0 - 2500 and
     10000 - 12500 steps; the latter of which grew from a frequency of 18 to a
     frequency of 26 (44%). Instead of replacing missing values with the mean,
     such as the mode or median, may have produced different results.
-    
+
     <style>
       table.gridtable {
         font-family: verdana,arial,sans-serif;
@@ -326,7 +357,7 @@ Make a panel plot containing a time series plot (i.e. `type="l"`) of the
 5-minute interval (x-axis) and the average number of steps taken, averaged
 across all weekday days or weekend days (y-axis).
 
-```{r, echo = TRUE}
-gp4 <- ggplot(stepsPerTime, aes(time, steps))
-gp4 + geom_line(col = "wheat4") + ggtitle("Average steps per time interval\n(weekdays vs. weekends)") + xlab("Time (in hours)") + ylab("Steps") + theme(plot.title = element_text(face = "bold", size = 12, hjust = 0.5)) + facet_grid(dayType ~ .)
+```{r steps-per-time-weekdays-vs-weekends, echo = TRUE}
+g <- ggplot(stepsPerTime, aes(time, steps))
+g + geom_line(col = "wheat4") + ggtitle("Average steps per time interval\n(weekdays vs. weekends)") + xlab("Time (in hours)") + ylab("Steps") + theme(plot.title = element_text(face = "bold", size = 12, hjust = 0.5)) + facet_grid(dayType ~ .)
 ```
