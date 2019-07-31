@@ -106,7 +106,7 @@ Reports will be run to answer specified questions in the homework assignment.
 Load and process the dataset
 
 ```{r, echo = TRUE}
-setwd("~/repos/coursera/github-assignments/reproducible-research-course-project-1")
+setwd("~/repos/coursera/data-science-specialization-github-assignments/reproducible-research-course-project-1")
 activityDataFile <- "data/activity.csv"
 if (!file.exists(activityDataFile)) {
     tempFile <- tempfile()
